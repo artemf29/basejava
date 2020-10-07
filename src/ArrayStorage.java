@@ -6,42 +6,34 @@ public class ArrayStorage {
     private int size = 0;
 
     void clear() {
-        int i = 0;
-        while (storage[i] != null) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
-            i++;
         }
         size = 0;
     }
 
     void save(Resume r) {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                size++;
-                break;
-            }
-        }
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
-        for (Resume resume : storage) {
-            if (resume != null && resume.uuid.equals(uuid)) {
-                return resume;
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return storage[i];
             }
         }
         return null;
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < storage.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].uuid)) {
-                storage[i] = null;
-                while (storage[i + 1] != null && i + 1 < storage.length) {
+                while (i < size) {
                     storage[i] = storage[i + 1];
-                    storage[i + 1] = null;
                     i++;
                 }
+                storage[size - 1] = null;
                 size--;
                 break;
             }
