@@ -5,8 +5,10 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
 
     void clear() {
-        for (int i = 0; i < storage.length; i++) {
+        int i = 0;
+        while (storage[i] != null) {
             storage[i] = null;
+            i++;
         }
     }
 
@@ -48,20 +50,26 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         int count = 0;
-        Resume[] withoutNull;
         for (Resume resume : storage) {
             if (resume != null) {
                 count++;
             }
         }
-        withoutNull = new Resume[count];
-        for (int i = 0;i<withoutNull.length;i++){
-            withoutNull[i] = storage[i];
+        Resume[] resumes = new Resume[count];
+        for (int i = 0; i < resumes.length; i++) {
+            resumes[i] = storage[i];
         }
-        return withoutNull;
+        return resumes;
     }
 
     int size() {
-        return storage.length;
+        int count = 0;
+        for (Resume resume : storage) {
+            if (resume != null) {
+                count++;
+            }
+        }
+        return count;
     }
 }
+
