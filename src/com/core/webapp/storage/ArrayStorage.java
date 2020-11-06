@@ -20,7 +20,7 @@ public class ArrayStorage {
     public void save(Resume resume) {
         if (getIndex(resume.getUuid()) != -1) {
             System.out.println("Resume " + resume.getUuid() + " already exist");
-        } else if (size == storage.length) {
+        } else if (size >= storage.length) {
             System.out.println("Storage overflow");
         } else {
             storage[size] = resume;
@@ -62,9 +62,7 @@ public class ArrayStorage {
      */
     public Resume[] getAll() {
         Resume[] resumes = new Resume[size];
-        for (int i = 0; i < size; i++) {
-            resumes[i] = storage[i];
-        }
+        System.arraycopy(storage,0,resumes,0,size);
         return resumes;
     }
 
