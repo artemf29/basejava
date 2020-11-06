@@ -2,19 +2,20 @@ package com.core.webapp;
 
 import com.core.webapp.model.Resume;
 import com.core.webapp.storage.ArrayStorage;
+import com.core.webapp.storage.Storage;
 
 /**
  * Test for your com.core.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
-        Resume r1 = new Resume();
+        final Resume r1 = new Resume();
         r1.setUuid("uuid1");
-        Resume r2 = new Resume();
+        final Resume r2 = new Resume();
         r2.setUuid("uuid2");
-        Resume r3 = new Resume();
+        final Resume r3 = new Resume();
         r3.setUuid("uuid3");
 
         ARRAY_STORAGE.save(r1);
