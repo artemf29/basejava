@@ -20,8 +20,8 @@ public interface Storage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    public Resume[] getAll();
+     Resume[] getAll();
 
-    public int size();
+     int size();
 }
 
