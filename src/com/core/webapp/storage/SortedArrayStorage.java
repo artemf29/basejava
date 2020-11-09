@@ -39,10 +39,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index == -1) {
+        if (index < 0) {
             System.out.println("Resume " + uuid + " not exist");
         } else {
-            storage[index] = storage[size - 1];
+            int i = index ;
+            while (i < (size - 1)) {
+                storage[i] = storage[i + 1];
+                i++;
+            }
             storage[size - 1] = null;
             size--;
         }
