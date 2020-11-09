@@ -1,9 +1,12 @@
 package com.core.webapp;
 
 import com.core.webapp.model.Resume;
-import com.core.webapp.storage.ArrayStorage;
+import com.core.webapp.storage.AbstractArrayStorage;
+import com.core.webapp.storage.SortedArrayStorage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -11,7 +14,7 @@ import java.io.*;
  * (just run, no need to understand)
  */
 public class MainArray {
-    private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private final static AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
