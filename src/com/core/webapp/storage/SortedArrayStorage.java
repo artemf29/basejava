@@ -7,48 +7,17 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index > -1) {
-            System.out.println("Resume " + resume.getUuid() + " already exist");
-        } else if (size >= STORAGE_LIMIT) {
-            System.out.println("Storage overflow");
-        } else {
-            index = (-1 * index) - 1;
-            int i = size + 1;
-            while (i > index) {
-                storage[i] = storage[i - 1];
-                i--;
-            }
-            storage[index] = resume;
-            size++;
-        }
-    }
-
-    /* Я бы вынес и эти два метода в абстракт, но с увеличением сложности возможно это лишнее */
-    @Override
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            System.out.println("Resume " + resume.getUuid() + " not exist");
-        } else {
-            storage[index] = resume;
-        }
+    protected void insertElement(Resume resume, int index) {
+        int flag = -index - 1;
+        System.arraycopy(storage, flag, storage, flag + 1, size - flag);
+        storage[flag] = resume;
     }
 
     @Override
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            System.out.println("Resume " + uuid + " not exist");
-        } else {
-            int i = index ;
-            while (i < (size - 1)) {
-                storage[i] = storage[i + 1];
-                i++;
-            }
-            storage[size - 1] = null;
-            size--;
+    protected void fillDeletedElement(int index) {
+        int flag = size - index - 1;
+        if (flag > 0) {
+            System.arraycopy(storage, index + 1, storage, index, flag);
         }
     }
 
