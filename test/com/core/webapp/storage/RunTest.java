@@ -6,7 +6,7 @@ import org.junit.runner.notification.Failure;
 
 public class RunTest {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(ArrayStorageTest.class, SortedArrayStorageTest.class);
+        Result result = JUnitCore.runClasses(ArrayStorageTest.class, SortedArrayStorageTest.class, ListStorageTest.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
