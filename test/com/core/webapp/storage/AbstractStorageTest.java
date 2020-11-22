@@ -5,11 +5,15 @@ import com.core.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
+    public  AbstractStorageTest(){}
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
@@ -19,12 +23,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final Resume RESUME_1 = new Resume(UUID_1);
-    private static final Resume RESUME_2 = new Resume(UUID_2);
-    private static final Resume RESUME_3 = new Resume(UUID_3);
-    private static final Resume RESUME_4 = new Resume(UUID_4);
-
-    private static final Resume[] RESUMES = new Resume[]{RESUME_1, RESUME_2, RESUME_3};
+    private static final Resume RESUME_1 = new Resume(UUID_1, "N1");
+    private static final Resume RESUME_2 = new Resume(UUID_2, "N2");
+    private static final Resume RESUME_3 = new Resume(UUID_3, "N3");
+    private static final Resume RESUME_4 = new Resume(UUID_4, "N4");
 
     @Before
     public void setUp() {
@@ -46,21 +48,11 @@ public abstract class AbstractStorageTest {
         storage.save(RESUME_1);
     }
 
-    @Test(expected = StorageException.class)
-    public void saveOverflow() {
-        try {
-            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
-            }
-        } catch (StorageException e) {
-            fail("overflow occurred ahead of time");
-        }
-        storage.save(new Resume());
-    }
 
-    @Test //В работе
+
+    @Test
     public void update() {
-        Resume resume = new Resume(UUID_1);
+        Resume resume = new Resume(UUID_1, "New Name");
         storage.update(resume);
         assertSame(resume, storage.get(UUID_1));
     }
@@ -106,13 +98,10 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
-        Resume[] resumes = storage.getAll();
-        assertEquals(storage.size(), resumes.length);
-        assertEquals(RESUME_1, resumes[0]);
-        assertEquals(RESUME_2, resumes[1]);
-        assertEquals(RESUME_3, resumes[2]);
-        assertArrayEquals(RESUMES, resumes);
+    public void getAllSorted() {
+        List<Resume> resumes = storage.getAllSorted();
+        assertEquals(3, resumes.size());
+        assertEquals(resumes, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
     }
 
     private void assertSize(int size) {

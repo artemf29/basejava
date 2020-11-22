@@ -3,7 +3,9 @@ package com.core.webapp.storage;
 import com.core.webapp.exception.StorageException;
 import com.core.webapp.model.Resume;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Array based storage for Resumes
@@ -54,8 +56,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+    public List<Resume> getAllSorted() {
+        return new ArrayList<>(Arrays.asList(storage));
     }
 
     @Override

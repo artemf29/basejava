@@ -2,8 +2,7 @@ package com.core.webapp.storage;
 
 import com.core.webapp.model.Resume;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapStorage extends AbstractStorage {
 
@@ -41,8 +40,8 @@ public class MapStorage extends AbstractStorage {
         storage.clear();
     }
 
-    public Resume[] getAll() {
-        return new Resume[0];
+    public List<Resume> getAllSorted() {
+        return new ArrayList<>(storage.values());
     }
 
     public int size() {
