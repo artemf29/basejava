@@ -1,5 +1,6 @@
 package com.core.webapp.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -16,6 +17,8 @@ public class Resume implements Comparable<Resume> {
     }
 
     public Resume(String uuid, String fullName) {
+        Objects.requireNonNull(uuid, "uuid must not be null");
+        Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
         this.fullName = fullName;
     }
@@ -31,23 +34,23 @@ public class Resume implements Comparable<Resume> {
 
         Resume resume = (Resume) o;
 
-        if (!uuid.equals(resume.uuid)) return false;
-        return fullName.equals(resume.fullName);
+        return uuid.equals(resume.uuid) &&
+                fullName.equals(resume.fullName);
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return uuid + " - " + fullName ;
+        return Objects.hash(uuid, fullName);
     }
 
     @Override
     public int compareTo(Resume o) {
         int compareName = fullName.compareTo(o.fullName);
         return compareName != 0 ? compareName : uuid.compareTo(o.uuid);
+    }
+
+    @Override
+    public String toString() {
+        return uuid + " - " + fullName;
     }
 }

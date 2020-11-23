@@ -13,11 +13,6 @@ import static org.junit.Assert.*;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    public  AbstractStorageTest(){}
-    public AbstractStorageTest(Storage storage) {
-        this.storage = storage;
-    }
-
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -27,6 +22,10 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_2 = new Resume(UUID_2, "N2");
     private static final Resume RESUME_3 = new Resume(UUID_3, "N3");
     private static final Resume RESUME_4 = new Resume(UUID_4, "N4");
+
+    protected AbstractStorageTest(Storage storage) {
+        this.storage = storage;
+    }
 
     @Before
     public void setUp() {
