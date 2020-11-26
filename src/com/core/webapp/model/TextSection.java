@@ -2,7 +2,7 @@ package com.core.webapp.model;
 
 import java.util.Objects;
 
-public class TextSection {
+public class TextSection extends Section {
     private final String text;
 
     public TextSection(String text) {
@@ -19,7 +19,7 @@ public class TextSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TextSection that = (TextSection) o;
-        return Objects.equals(text, that.text);
+        return text.equals(that.text);
     }
 
     @Override

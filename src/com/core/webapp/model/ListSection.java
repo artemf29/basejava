@@ -3,7 +3,7 @@ package com.core.webapp.model;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSection {
+public class ListSection extends Section {
     private final List<String> list;
 
     public ListSection(List<String> list) {
@@ -20,7 +20,7 @@ public class ListSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListSection that = (ListSection) o;
-        return Objects.equals(list, that.list);
+        return list.equals(that.list);
     }
 
     @Override
