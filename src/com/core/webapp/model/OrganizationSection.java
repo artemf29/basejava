@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection {
-    private final List<Organization> organizations;
+     final List<Organization> organizations;
 
     public OrganizationSection(List<Organization> organizations) {
         Objects.requireNonNull(organizations, "organizations must not be null");
@@ -30,8 +30,6 @@ public class OrganizationSection {
 
     @Override
     public String toString() {
-        return "OrganizationSection{" +
-                "organizations=" + organizations.toString() +
-                '}';
+        return organizations.toString();
     }
 }

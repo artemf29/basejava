@@ -41,12 +41,12 @@ public class Organization {
 
     @Override
     public String toString() {
-        return "Organization{" +
-                "name: " + name +
-                "startDate: " + start +
-                "endDate: " + end +
-                "position: " + position +
-                "info: " + info +
+        return "\nOrganization{" +
+                " name: " + name + "\n" +
+                " startDate: " + start +
+                " endDate: " + end + "\n" +
+                " position: " + position +
+                " info: " + info +
                 "}";
     }
 }
