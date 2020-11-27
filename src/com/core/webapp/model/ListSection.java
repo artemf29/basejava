@@ -1,10 +1,15 @@
 package com.core.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
     private final List<String> list;
+
+    public ListSection(String... list) {
+        this(Arrays.asList(list));
+    }
 
     public ListSection(List<String> list) {
         Objects.requireNonNull(list, "list must be not null");

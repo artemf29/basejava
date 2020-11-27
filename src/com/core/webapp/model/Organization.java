@@ -1,12 +1,18 @@
 package com.core.webapp.model;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.time.Month;
+import java.util.*;
+
+import static com.core.webapp.util.DateUtil.*;
 
 public class Organization {
     private final Link name;
-    private final List<Information> information;
+    private List<Information> information = new ArrayList<>();
+
+    public Organization(String name, String url, Information... information) {
+        this(new Link(name, url), Arrays.asList(information));
+    }
 
     public Organization(Link name, List<Information> information) {
         Objects.requireNonNull(name, "Name must not be null");
@@ -30,7 +36,7 @@ public class Organization {
 
     @Override
     public String toString() {
-        return "Organization{" +
+        return "\nOrganization{" +
                 "name= " + name +
                 "information= " + information +
                 "}";
@@ -41,6 +47,15 @@ public class Organization {
         private final LocalDate end;
         private final String position;
         private final String info;
+
+
+        public Information(int start, Month startM, String position, String info) {
+            this(of(start, startM), NOW, position, info);
+        }
+
+        public Information(int start, Month startM, int end, Month endM, String position, String info) {
+            this(of(start, startM), of(end, endM), position, info);
+        }
 
         public Information(LocalDate start, LocalDate end, String position, String info) {
             Objects.requireNonNull(start, "Start must not be null");
@@ -86,8 +101,8 @@ public class Organization {
 
         @Override
         public String toString() {
-            return  " startDate: " + start +
-                    " endDate: " + end + "\n" +
+            return " startDate: " + start +
+                    " endDate: " + end +
                     " position: " + position +
                     " info: " + info +
                     "}";
