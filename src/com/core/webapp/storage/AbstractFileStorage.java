@@ -22,6 +22,10 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         this.file = file;
     }
 
+    protected abstract void doWrite(Resume resume, File searchKey) throws IOException;
+
+    protected abstract void doRead(File searchKey) throws IOException;
+
     @Override
     protected File getSearchKey(String uuid) {
         return new File(file, uuid);
@@ -37,20 +41,27 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         }
     }
 
-    protected abstract void doWrite(Resume resume, File searchKey) throws IOException;
-
     @Override
     protected void doUpdate(Resume resume, File searchKey) {
-
+        try {
+            doWrite(resume, searchKey);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
     }
 
     @Override
     protected void doDelete(File searchKey) {
-
+        searchKey.deleteOnExit();
     }
 
     @Override
     protected Resume doGet(File searchKey) {
+        try {
+            doRead(searchKey);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
         return null;
     }
 
@@ -66,11 +77,15 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
-
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
     }
 
     @Override
     public int size() {
-        return 0;
+        return (int) file.length();
     }
 }

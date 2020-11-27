@@ -25,12 +25,20 @@ public class Resume implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
-    public String getContacts(ContactType type) {
+    public String getContact(ContactType type) {
         return contacts.get(type);
     }
 
-    public Section getSections(SectionType type) {
+    public Section getSection(SectionType type) {
         return sections.get(type);
+    }
+
+    public String addContact(ContactType type, String val) {
+        return contacts.put(type, val);
+    }
+
+    public Section addSection(SectionType type, Section section) {
+        return sections.put(type, section);
     }
 
     public String getUuid() {
