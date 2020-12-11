@@ -1,12 +1,14 @@
 package com.core.webapp.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
 
 import static com.core.webapp.util.DateUtil.*;
 
-public class Organization {
+public class Organization implements Serializable {
     private final Link name;
     private List<Information> information = new ArrayList<>();
 
@@ -42,7 +44,10 @@ public class Organization {
                 "}";
     }
 
-    public static class Information {
+    public static class Information implements Serializable {
+        @Serial
+        private static final long serialVersionUID = 1L;
+
         private final LocalDate start;
         private final LocalDate end;
         private final String position;

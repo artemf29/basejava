@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
-    private File file;
+    private final File file;
 
     public AbstractFileStorage(File file) {
         Objects.requireNonNull(file, "file must not be null");
@@ -22,9 +22,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         this.file = file;
     }
 
-    protected abstract void doWrite(Resume resume, OutputStream file) throws IOException;
+    protected abstract void doWrite(Resume resume, OutputStream outputStream) throws IOException;
 
-    protected abstract Resume doRead(InputStream file) throws IOException;
+    protected abstract Resume doRead(InputStream inputStream) throws IOException;
 
     @Override
     protected File getSearchKey(String uuid) {
