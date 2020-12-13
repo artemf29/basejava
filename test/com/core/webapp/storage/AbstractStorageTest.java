@@ -27,7 +27,7 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_3 = new Resume(UUID_3, "N3");
     private static final Resume RESUME_4 = new Resume(UUID_4, "N4");
 
-    static {
+    /*static {
         RESUME_1.addContact(ContactType.MAIL, "mail1@ya.ru");
         RESUME_1.addContact(ContactType.MOBILE, "11111");
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
@@ -51,7 +51,7 @@ public abstract class AbstractStorageTest {
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
                                 new Organization.Information(2015, Month.JANUARY, "Information1", "content1"))));
-    }
+    }*/
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
