@@ -26,8 +26,8 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_2 = new Resume(UUID_2, "N2");
     private static final Resume RESUME_3 = new Resume(UUID_3, "N3");
     private static final Resume RESUME_4 = new Resume(UUID_4, "N4");
-
-    /*static {
+/*
+    static {
         RESUME_1.addContact(ContactType.MAIL, "mail1@ya.ru");
         RESUME_1.addContact(ContactType.MOBILE, "11111");
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
@@ -51,8 +51,8 @@ public abstract class AbstractStorageTest {
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
                                 new Organization.Information(2015, Month.JANUARY, "Information1", "content1"))));
-    }*/
-
+    }
+*/
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
@@ -91,7 +91,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test(expected = NotExistStorageException.class)
-    public void delete() {
+    public void delete() throws Exception {
         storage.delete(UUID_1);
         assertSize(2);
         storage.get(UUID_1);
