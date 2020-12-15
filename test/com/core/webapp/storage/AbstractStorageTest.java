@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("C:\\storage");
+    protected static final File STORAGE_DIR = new File("E:\\Artem\\JAVA\\code\\basejava\\storage");
 
     protected Storage storage;
 
@@ -41,8 +41,8 @@ public abstract class AbstractStorageTest {
                                 new Organization.Information(2001, Month.MARCH, 2005, Month.JANUARY, "Information2", "content2"))));
         RESUME_1.addSection(SectionType.EDUCATION,
                 new OrganizationSection(
-                        new Organization("Institute", null,
-                                new Organization.Information(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", null),
+                        new Organization("Institute", "",
+                                new Organization.Information(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", ""),
                                 new Organization.Information(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
                         new Organization("Organization12", "http://Organization12.ru")));
         RESUME_2.addContact(ContactType.SOCIAL, "skype2");
@@ -51,8 +51,8 @@ public abstract class AbstractStorageTest {
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
                                 new Organization.Information(2015, Month.JANUARY, "Information1", "content1"))));
-    }
-*/
+    }*/
+
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
@@ -91,7 +91,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test(expected = NotExistStorageException.class)
-    public void delete() throws Exception {
+    public void delete() {
         storage.delete(UUID_1);
         assertSize(2);
         storage.get(UUID_1);

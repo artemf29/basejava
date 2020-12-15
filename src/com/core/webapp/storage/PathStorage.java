@@ -45,7 +45,7 @@ public class PathStorage extends AbstractStorage<Path> {
     }
 
     @Override
-    protected void doUpdate(Resume resume, Path Path) {
+    protected void doUpdate(Resume resume, Path path) {
         try {
             streamSerializerStrategy.doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
         } catch (IOException e) {
@@ -54,11 +54,11 @@ public class PathStorage extends AbstractStorage<Path> {
     }
 
     @Override
-    protected void doDelete(Path Path) {
+    protected void doDelete(Path path) {
         try {
             Files.delete(path);
         } catch (IOException e) {
-            throw new StorageException("Path delete error", getFileName(path), e);
+           throw new StorageException("Path delete error", getFileName(path), e);
         }
     }
 
@@ -72,7 +72,7 @@ public class PathStorage extends AbstractStorage<Path> {
     }
 
     @Override
-    protected boolean isExist(Path Path) {
+    protected boolean isExist(Path path) {
         return Files.isRegularFile(path);
     }
 
