@@ -53,6 +53,14 @@ public class Organization implements Serializable {
                 "}";
     }
 
+    public Link getName() {
+        return name;
+    }
+
+    public List<Information> getInformation() {
+        return information;
+    }
+
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Information implements Serializable {
         @Serial

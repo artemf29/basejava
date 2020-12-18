@@ -1,6 +1,5 @@
 package com.core.webapp.util;
 
-
 import com.core.webapp.model.Section;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
