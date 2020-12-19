@@ -36,8 +36,7 @@ public class Link implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Link link = (Link) o;
-        return name.equals(link.name) &&
-                Objects.equals(url, link.url);
+        return name.equals(link.name) && Objects.equals(url, link.url);
     }
 
     @Override

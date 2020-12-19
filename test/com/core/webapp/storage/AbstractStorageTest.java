@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public abstract class AbstractStorageTest {
     public void update() {
         Resume resume = new Resume(UUID_1, "New Name");
         storage.update(resume);
-        assertEquals(resume, storage.get(UUID_1));
+        assertEquals(resume,storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)

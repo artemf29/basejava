@@ -9,12 +9,19 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
-import static com.core.webapp.util.DateUtil.*;
+import static com.core.webapp.util.DateUtil.NOW;
+import static com.core.webapp.util.DateUtil.of;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private Link name;
     private List<Information> information = new ArrayList<>();
 
@@ -32,33 +39,30 @@ public class Organization implements Serializable {
         this.information = information;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Organization that = (Organization) o;
-        return name.equals(that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return "\nOrganization{" +
-                "name= " + name +
-                "information= " + information +
-                "}";
-    }
-
     public Link getName() {
         return name;
     }
 
     public List<Information> getInformation() {
         return information;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization that = (Organization) o;
+        return name.equals(that.name) && information.equals(that.information);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, information);
+    }
+
+    @Override
+    public String toString() {
+        return "Organization [" + name + "," + information + "]";
     }
 
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -91,7 +95,7 @@ public class Organization implements Serializable {
             this.start = start;
             this.end = end;
             this.position = position;
-            this.info = info;
+            this.info = info == null ? "" : info;
         }
 
         public LocalDate getStart() {
@@ -115,10 +119,7 @@ public class Organization implements Serializable {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Information that = (Information) o;
-            return start.equals(that.start) &&
-                    end.equals(that.end) &&
-                    position.equals(that.position) &&
-                    Objects.equals(info, that.info);
+            return start.equals(that.start) && end.equals(that.end) && position.equals(that.position) && Objects.equals(info, that.info);
         }
 
         @Override
@@ -128,11 +129,7 @@ public class Organization implements Serializable {
 
         @Override
         public String toString() {
-            return " startDate: " + start +
-                    " endDate: " + end +
-                    " position: " + position +
-                    " info: " + info +
-                    "}";
+            return "Information [" + start + "," + end + ";" + position + ";" + info + "]";
         }
     }
 }

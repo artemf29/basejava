@@ -4,8 +4,10 @@ import com.core.webapp.model.*;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class DataStreamSerializer implements StreamSerializer {
 
@@ -20,8 +22,8 @@ public class DataStreamSerializer implements StreamSerializer {
                 dataOutputStream.writeUTF(entry.getValue());
             });
             writeCollection(dataOutputStream, resume.getSections().entrySet(), entry -> {
-                Section section = entry.getValue();
                 SectionType sectionType = entry.getKey();
+                Section section = entry.getValue();
                 dataOutputStream.writeUTF(sectionType.name());
                 switch (sectionType) {
                     case PERSONAL, OBJECTIVE -> dataOutputStream.writeUTF(((TextSection) section).getText());
@@ -34,8 +36,8 @@ public class DataStreamSerializer implements StreamSerializer {
                                 writeCollection(dataOutputStream, organization.getInformation(), information -> {
                                     writeLocalDate(dataOutputStream, information.getStart());
                                     writeLocalDate(dataOutputStream, information.getEnd());
-                                    dataOutputStream.writeUTF(information.getInfo());
                                     dataOutputStream.writeUTF(information.getPosition());
+                                    dataOutputStream.writeUTF(information.getInfo());
                                 });
                             });
                 }
@@ -63,9 +65,8 @@ public class DataStreamSerializer implements StreamSerializer {
             readItems(dataInputStream, () -> {
                 SectionType sectionType = SectionType.valueOf(dataInputStream.readUTF());
                 resume.addSection(sectionType, readSection(dataInputStream, sectionType));
-
             });
-            return null;
+            return resume;
         }
     }
 
