@@ -2,7 +2,6 @@ package com.core.webapp.storage.serializer;
 
 import com.core.webapp.model.*;
 import com.core.webapp.util.JsonParser;
-import com.core.webapp.util.XmlParser;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
