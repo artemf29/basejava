@@ -15,8 +15,7 @@ public enum ContactType {
         this.contact = contact;
     }
 
-    @Override
-    public String toString() {
-        return contact.toString();
+    public String getContact() {
+        return contact;
     }
 }

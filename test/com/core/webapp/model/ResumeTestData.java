@@ -14,8 +14,8 @@ public class ResumeTestData {
     public static final Resume RESUME_4 = new Resume(UUID_4, "N4");
 
     static {
-        RESUME_1.addContact(ContactType.MAIL, "mail1@ya.ru");
-        RESUME_1.addContact(ContactType.MOBILE, "11111");
+        RESUME_1.addContact(ContactType.MAIL, "artem@mail.ru");
+        RESUME_1.addContact(ContactType.MOBILE, "12345678");
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
@@ -33,10 +33,7 @@ public class ResumeTestData {
                         new Organization("Organization12", "http://Organization12.ru")));
         RESUME_2.addContact(ContactType.SOCIAL, "skype2");
         RESUME_2.addContact(ContactType.NUMBER, "22222");
-        RESUME_1.addSection(SectionType.EXPERIENCE,
-                new OrganizationSection(
-                        new Organization("Organization2", "http://Organization2.ru",
-                                new Organization.Information(2015, Month.JANUARY, "Information1", "content1"))));
+        RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
     }
 
 }
