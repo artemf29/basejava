@@ -12,7 +12,7 @@ public class ResumeTestData {
     public static final Resume RESUME_2 = new Resume(UUID_2, "N2");
     public static final Resume RESUME_3 = new Resume(UUID_3, "N3");
     public static final Resume RESUME_4 = new Resume(UUID_4, "N4");
-
+/*
     static {
         RESUME_1.addContact(ContactType.MAIL, "artem@mail.ru");
         RESUME_1.addContact(ContactType.MOBILE, "12345678");
@@ -35,5 +35,5 @@ public class ResumeTestData {
         RESUME_2.addContact(ContactType.NUMBER, "22222");
         RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
     }
-
+*/
 }

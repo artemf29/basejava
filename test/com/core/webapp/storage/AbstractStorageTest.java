@@ -1,5 +1,6 @@
 package com.core.webapp.storage;
 
+import com.core.webapp.Config;
 import com.core.webapp.exception.*;
 import com.core.webapp.model.*;
 import org.junit.Before;
@@ -13,7 +14,7 @@ import static com.core.webapp.model.ResumeTestData.*;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("E:\\Artem\\JAVA\\code\\basejava\\storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected Storage storage;
 
