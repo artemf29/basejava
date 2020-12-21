@@ -1,12 +1,12 @@
 package com.core.webapp.model;
 
-import java.time.Month;
+import java.util.UUID;
 
 public class ResumeTestData {
-    public static final String UUID_1 = "uuid1";
-    public static final String UUID_2 = "uuid2";
-    public static final String UUID_3 = "uuid3";
-    public static final String UUID_4 = "uuid4";
+    public static final String UUID_1 = UUID.randomUUID().toString();
+    public static final String UUID_2 = UUID.randomUUID().toString();
+    public static final String UUID_3 = UUID.randomUUID().toString();
+    public static final String UUID_4 = UUID.randomUUID().toString();
 
     public static final Resume RESUME_1 = new Resume(UUID_1, "N1");
     public static final Resume RESUME_2 = new Resume(UUID_2, "N2");
