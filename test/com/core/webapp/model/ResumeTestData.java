@@ -12,10 +12,13 @@ public class ResumeTestData {
     public static final Resume RESUME_2 = new Resume(UUID_2, "N2");
     public static final Resume RESUME_3 = new Resume(UUID_3, "N3");
     public static final Resume RESUME_4 = new Resume(UUID_4, "N4");
-/*
+
     static {
         RESUME_1.addContact(ContactType.MAIL, "artem@mail.ru");
         RESUME_1.addContact(ContactType.MOBILE, "12345678");
+        RESUME_4.addContact(ContactType.GITHUB, "artemf29");
+        RESUME_4.addContact(ContactType.MOBILE, "123");
+        /*
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
@@ -31,9 +34,10 @@ public class ResumeTestData {
                                 new Organization.Information(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", ""),
                                 new Organization.Information(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
                         new Organization("Organization12", "http://Organization12.ru")));
+         */
         RESUME_2.addContact(ContactType.SOCIAL, "skype2");
         RESUME_2.addContact(ContactType.NUMBER, "22222");
-        RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
+        //  RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
     }
-*/
+
 }

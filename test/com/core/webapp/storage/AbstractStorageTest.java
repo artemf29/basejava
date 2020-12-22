@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.core.webapp.model.ResumeTestData.*;
@@ -46,8 +47,11 @@ public abstract class AbstractStorageTest {
     @Test
     public void update() {
         Resume resume = new Resume(UUID_1, "New Name");
+        resume.setContact(ContactType.MOBILE, "12345678");
+        resume.setContact(ContactType.GITHUB, "artemf29");
+        resume.setContact(ContactType.MAIL, "123");
         storage.update(resume);
-        assertEquals(resume,storage.get(UUID_1));
+        assertEquals(resume, storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -94,7 +98,9 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() {
         List<Resume> resumes = storage.getAllSorted();
         assertEquals(3, resumes.size());
-        assertEquals(resumes, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
+        List<Resume> sortedResume = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        Collections.sort(sortedResume);
+        assertEquals(sortedResume, resumes);
     }
 
     private void assertSize(int size) {
