@@ -1,5 +1,6 @@
 package com.core.webapp.model;
 
+import java.time.Month;
 import java.util.UUID;
 
 public class ResumeTestData {
@@ -18,12 +19,12 @@ public class ResumeTestData {
         RESUME_1.addContact(ContactType.MOBILE, "12345678");
         RESUME_4.addContact(ContactType.GITHUB, "artemf29");
         RESUME_4.addContact(ContactType.MOBILE, "123");
-        /*
+
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
         RESUME_1.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
-        RESUME_1.addSection(SectionType.EXPERIENCE,
+       /* RESUME_1.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
                         new Organization("Organization11", "http://Organization11.ru",
                                 new Organization.Information(2005, Month.JANUARY, "Information1", "content1"),
@@ -37,7 +38,7 @@ public class ResumeTestData {
          */
         RESUME_2.addContact(ContactType.SOCIAL, "skype2");
         RESUME_2.addContact(ContactType.NUMBER, "22222");
-        //  RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
+        RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
     }
 
 }
