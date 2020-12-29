@@ -2,5 +2,5 @@
 <footer>
     Filimonov Artem
     <br/>
-    mail: artemf29@icloud.com
+    artemf29@icloud.com
 </footer>

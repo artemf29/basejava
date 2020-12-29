@@ -1,13 +1,43 @@
-header{
-    background: firebrick;
-    color: bisque;
+section {
+    width: 900px;
+    margin: auto;
+}
+header {
+    background: none repeat scroll bisque;
+    color: firebrick;
     font-size: 20px;
     padding: 5px 20px;
 }
-footer{
-    background: lightslategray;
+
+footer {
+    background: none repeat scroll lightslategray;
     color: bisque;
     font-size: 20px;
     padding: 5px 20px;
     margin: 20px 0;
+}
+
+d1 {
+    background: none repeat scroll lavender;
+    margin: 8px 0;
+    padding: 0;
+}
+
+d2 {
+    display: inline-block;
+    width: 170px;
+}
+
+d3 {
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+h2, h3 {
+    margin: 15px 0 5px;
+}
+
+li {
+    margin: 15px 0;
 }

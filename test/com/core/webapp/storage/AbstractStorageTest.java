@@ -46,17 +46,17 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume resume = new Resume(UUID_1, "New Name");
-        resume.setContact(ContactType.MOBILE, "12345678");
+        Resume resume = new Resume(UUID_1, "Anna");
+        resume.setContact(ContactType.NUMBER, "789123456");
         resume.setContact(ContactType.GITHUB, "artemf29");
-        resume.setContact(ContactType.MAIL, "123");
+        resume.setContact(ContactType.MAIL, "filimonov@mail.ru");
         storage.update(resume);
         assertEquals(resume, storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        storage.get("dummy");
+        storage.get("thing");
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -68,7 +68,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void deleteNotExist() {
-        storage.delete("dummy");
+        storage.delete("thing");
     }
 
     @Test
@@ -91,7 +91,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() {
-        storage.get("dummy");
+        storage.get("thing");
     }
 
     @Test
