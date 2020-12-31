@@ -11,11 +11,12 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <section>
-    <table border="1" cellpadding="8" cellspacing="0">
+    <a href="resume?action=add"><img src="img/add.png" ></a>
+    <table border="1" cellpadding="8" cellspacing="0" style="margin:auto">
         <tr>
             <th>Имя</th>
             <th>Email</th>
-            <th>Достижения</th>
+            <th>Должность</th>
             <th>Изменить</th>
             <th>Удалить</th>
         </tr>
@@ -28,7 +29,7 @@
                         ${resume.getContact(ContactType.MAIL)}
                 </td>
                 <td>
-                    <%=SectionType.ACHIEVEMENT.toHtml(resume.getSection(SectionType.ACHIEVEMENT))%>
+                        ${resume.getSection(SectionType.OBJECTIVE)}
                 </td>
                 <td>
                     <a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/edit.png"></a>

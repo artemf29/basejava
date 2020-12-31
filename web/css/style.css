@@ -41,3 +41,32 @@ h2, h3 {
 li {
     margin: 15px 0;
 }
+
+a[href^="social:"] {
+    padding-left: 20px !important;
+    background: url(../img/soc.png) no-repeat center left;
+}
+
+a[href^="mailto:"] {
+    padding-left: 20px !important;
+    background: url(../img/email.png) no-repeat center left;
+}
+
+a[href^="https://stackoverflow.com"] {
+    padding-left: 20px !important;
+    background: url(../img/stack.png) no-repeat center left;
+}
+
+a[href^="https://www.linkedin.com"] {
+    padding-left: 20px !important;
+    background: url(../img/ln.png) no-repeat center left;
+}
+
+a[href*="github."] {
+    padding-left: 20px !important;
+    background: url(../img/github.png) no-repeat center left;
+}
+a[href^="number:"] {
+    padding-left: 20px !important;
+    background: url(../img/tel.png) no-repeat center left;
+}

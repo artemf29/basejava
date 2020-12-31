@@ -22,6 +22,8 @@ public class Organization implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    public static final Organization EMPTY = new Organization("", "", Information.EMPTY);
+
     private Link name;
     private List<Information> information = new ArrayList<>();
 
@@ -33,8 +35,6 @@ public class Organization implements Serializable {
     }
 
     public Organization(Link name, List<Information> information) {
-        Objects.requireNonNull(name, "Name must not be null");
-        Objects.requireNonNull(information, "Information must not be null");
         this.name = name;
         this.information = information;
     }
@@ -69,6 +69,8 @@ public class Organization implements Serializable {
     public static class Information implements Serializable {
         @Serial
         private static final long serialVersionUID = 1L;
+
+        public static final Information EMPTY = new Information();
 
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate start;

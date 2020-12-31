@@ -1,8 +1,8 @@
 package com.core.webapp.model;
 
 public enum SectionType {
+    OBJECTIVE("Должность"),
     PERSONAL("Личные качества"),
-    OBJECTIVE("Позиция"),
     ACHIEVEMENT("Достижения"),
     QUALIFICATIONS("Квалификация"),
     EXPERIENCE("Опыт работы"),
