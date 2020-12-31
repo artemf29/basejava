@@ -4,19 +4,34 @@ public enum ContactType {
     NUMBER("Мобильный"),
     MAIL("Электронная почта") {
         @Override
-        public String toHtml(String value) {
-            return getContact() + ":<a href='mailto:" + value + "'>" + value + "</a>";
+        public String toHtml0(String value) {
+            return getContact() + ": " + toLink("mailto:" + value, value);
         }
     },
     GITHUB("Профиль GitHub") {
         @Override
-        public String toHtml(String value) {
-            return getContact() + ": <a href='github:" + value + "'>" + value + "</a>";
+        public String toHtml0(String value) {
+            return toLink(value);
         }
     },
-    LINKEDIN("Профиль LinkedIn"),
-    STACKOVERFLOW("Профиль Stackoverflow"),
-    SOCIAL("Соц.сети");
+    LINKEDIN("Профиль LinkedIn") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    },
+    STACKOVERFLOW("Профиль Stackoverflow") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    },
+    SOCIAL("Соц.сети") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    };
 
     private final String contact;
 
@@ -36,4 +51,11 @@ public enum ContactType {
         return (value == null) ? "" : toHtml0(value);
     }
 
+    public String toLink(String href) {
+        return toLink(href, contact);
+    }
+
+    public static String toLink(String href, String contact) {
+        return "<a href='" + href + "'>" + contact + "</a>";
+    }
 }

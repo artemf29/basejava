@@ -22,6 +22,7 @@
             <jsp:useBean id="contactEntry"
                          type="java.util.Map.Entry<com.core.webapp.model.ContactType,java.lang.String>"/>
                 <%=contactEntry.getKey().toHtml(contactEntry.getValue())%><br/>
+          <p>
         </c:forEach>
     <p>
     <hr>

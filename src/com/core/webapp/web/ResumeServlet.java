@@ -3,6 +3,8 @@ package com.core.webapp.web;
 import com.core.webapp.Config;
 import com.core.webapp.model.*;
 import com.core.webapp.storage.Storage;
+import com.core.webapp.util.DateUtil;
+import com.core.webapp.util.HtmlUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,21 +28,67 @@ public class ResumeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-        Resume resume = storage.get(uuid);
-        resume.setFullName(fullName);
+        final boolean isCreate = (uuid == null || uuid.length() == 0);
+        Resume resume;
+        if (isCreate) {
+            resume = new Resume(fullName);
+        } else {
+            resume = storage.get(uuid);
+            resume.setFullName(fullName);
+        }
         for (ContactType contact : ContactType.values()) {
             String value = request.getParameter(contact.name());
-            if (value != null && value.trim().length() != 0) {
-                resume.setContact(contact, value);
-            } else {
+            if (HtmlUtil.isEmpty(value)) {
                 resume.getContacts().remove(contact);
+            } else {
+                resume.setContact(contact, value);
             }
         }
-        storage.update(resume);
+        for (SectionType type : SectionType.values()) {
+            String value = request.getParameter(type.name());
+            String[] values = request.getParameterValues(type.name());
+            if (HtmlUtil.isEmpty(value) && values.length < 2) {
+                resume.getSections().remove(type);
+            } else {
+                switch (type) {
+                    case OBJECTIVE, PERSONAL -> resume.setSection(type, new TextSection(value));
+                    case ACHIEVEMENT, QUALIFICATIONS -> resume.setSection(type, new ListSection(value.split("\\n")));
+                    case EDUCATION, EXPERIENCE -> {
+                        List<Organization> organizations = new ArrayList<>();
+                        String[] urls = request.getParameterValues(type.name() + "url");
+                        for (int i = 0; i < values.length; i++) {
+                            String name = values[i];
+                            if (!HtmlUtil.isEmpty(name)) {
+                                List<Organization.Information> informational = new ArrayList<>();
+                                String pfx = type.name() + i;
+                                String[] start = request.getParameterValues(pfx + "start");
+                                String[] end = request.getParameterValues(pfx + "end");
+                                String[] positions = request.getParameterValues(pfx + "position");
+                                String[] inform = request.getParameterValues(pfx + "info");
+                                for (int k = 0; k < start.length; k++) {
+                                    if (!HtmlUtil.isEmpty(start[k])) {
+                                        informational.add(new Organization.Information(
+                                                DateUtil.parse(start[k]), DateUtil.parse(end[k]), positions[k], inform[k]));
+                                    }
+                                }
+                                organizations.add(new Organization(new Link(name, urls[i]), informational));
+                            }
+                        }
+                        resume.setSection(type, new OrganizationSection(organizations));
+                    }
+                }
+            }
+        }
+        if (isCreate) {
+            storage.save(resume);
+        } else {
+            storage.update(resume);
+        }
         response.sendRedirect("resume");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
         String uuid = request.getParameter("uuid");
         String action = request.getParameter("action");
         if (action == null) {
@@ -56,6 +104,7 @@ public class ResumeServlet extends HttpServlet {
                 return;
             }
             case "view" -> resume = storage.get(uuid);
+            case "add" -> resume = Resume.EMPTY;
             case "edit" -> {
                 resume = storage.get(uuid);
                 for (SectionType type : SectionType.values()) {
