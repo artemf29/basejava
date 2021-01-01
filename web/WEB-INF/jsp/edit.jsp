@@ -1,10 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ page import="com.core.webapp.model.ContactType" %>
 <%@ page import="com.core.webapp.model.SectionType" %>
 <%@ page import="com.core.webapp.model.ListSection" %>
 <%@ page import="com.core.webapp.model.OrganizationSection" %>
 <%@ page import="com.core.webapp.util.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +13,7 @@
     <title>Резюме ${resume.fullName}</title>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<jsp:include page="/fragments/header.jsp"/>
 <section>
     <form method="post" action="resume" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="uuid" value="${resume.uuid}">
@@ -92,6 +92,6 @@
         <button onclick="window.history.back()">Отменить</button>
     </form>
 </section>
-<jsp:include page="fragments/footer.jsp"/>
+<jsp:include page="/fragments/footer.jsp"/>
 </body>
 </html>

@@ -26,20 +26,28 @@ public class DataStreamSerializer implements StreamSerializer {
                 Section section = entry.getValue();
                 dataOutputStream.writeUTF(sectionType.name());
                 switch (sectionType) {
-                    case PERSONAL, OBJECTIVE -> dataOutputStream.writeUTF(((TextSection) section).getText());
-                    case ACHIEVEMENT, QUALIFICATIONS -> writeCollection(
-                            dataOutputStream, ((ListSection) section).getList(), dataOutputStream::writeUTF);
-                    case EXPERIENCE, EDUCATION -> writeCollection(
-                            dataOutputStream, ((OrganizationSection) section).getOrganizations(), organization -> {
-                                dataOutputStream.writeUTF(organization.getName().getName());
-                                dataOutputStream.writeUTF(organization.getName().getUrl());
-                                writeCollection(dataOutputStream, organization.getInformation(), information -> {
-                                    writeLocalDate(dataOutputStream, information.getStart());
-                                    writeLocalDate(dataOutputStream, information.getEnd());
-                                    dataOutputStream.writeUTF(information.getPosition());
-                                    dataOutputStream.writeUTF(information.getInfo());
+                    case PERSONAL:
+                    case OBJECTIVE:
+                        dataOutputStream.writeUTF(((TextSection) section).getText());
+                        break;
+                    case ACHIEVEMENT:
+                    case QUALIFICATIONS:
+                        writeCollection(
+                                dataOutputStream, ((ListSection) section).getList(), dataOutputStream::writeUTF);
+                        break;
+                    case EXPERIENCE:
+                    case EDUCATION:
+                        writeCollection(
+                                dataOutputStream, ((OrganizationSection) section).getOrganizations(), organization -> {
+                                    dataOutputStream.writeUTF(organization.getName().getName());
+                                    dataOutputStream.writeUTF(organization.getName().getUrl());
+                                    writeCollection(dataOutputStream, organization.getInformation(), information -> {
+                                        writeLocalDate(dataOutputStream, information.getStart());
+                                        writeLocalDate(dataOutputStream, information.getEnd());
+                                        dataOutputStream.writeUTF(information.getPosition());
+                                        dataOutputStream.writeUTF(information.getInfo());
+                                    });
                                 });
-                            });
                 }
             });
         }
@@ -72,13 +80,16 @@ public class DataStreamSerializer implements StreamSerializer {
 
     private Section readSection(DataInputStream dataInputStream, SectionType sectionType) throws IOException {
         switch (sectionType) {
-            case PERSONAL, OBJECTIVE -> {
+            case PERSONAL:
+            case OBJECTIVE: {
                 return new TextSection(dataInputStream.readUTF());
             }
-            case ACHIEVEMENT, QUALIFICATIONS -> {
+            case ACHIEVEMENT:
+            case QUALIFICATIONS: {
                 return new ListSection(readList(dataInputStream, dataInputStream::readUTF));
             }
-            case EXPERIENCE, EDUCATION -> {
+            case EXPERIENCE:
+            case EDUCATION: {
                 return new OrganizationSection(readList(dataInputStream, () -> new Organization(
                         new Link(dataInputStream.readUTF(), dataInputStream.readUTF()),
                         readList(dataInputStream, () -> new Organization.Information(
@@ -86,7 +97,8 @@ public class DataStreamSerializer implements StreamSerializer {
                                 dataInputStream.readUTF(), dataInputStream.readUTF()
                         )))));
             }
-            default -> throw new IllegalStateException();
+            default:
+                throw new IllegalStateException();
         }
     }
 

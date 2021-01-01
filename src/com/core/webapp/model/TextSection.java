@@ -1,10 +1,8 @@
 package com.core.webapp.model;
 
-import java.io.Serial;
 import java.util.Objects;
 
 public class TextSection extends Section {
-    @Serial
     private static final long serialVersionUID = 1L;
     public static final TextSection EMPTY = new TextSection("");
 

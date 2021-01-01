@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class ResumeServlet extends HttpServlet {
     private Storage storage;
 
@@ -51,9 +50,16 @@ public class ResumeServlet extends HttpServlet {
                 resume.getSections().remove(type);
             } else {
                 switch (type) {
-                    case OBJECTIVE, PERSONAL -> resume.setSection(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> resume.setSection(type, new ListSection(value.split("\\n")));
-                    case EDUCATION, EXPERIENCE -> {
+                    case OBJECTIVE:
+                    case PERSONAL:
+                        resume.setSection(type, new TextSection(value));
+                        break;
+                    case ACHIEVEMENT:
+                    case QUALIFICATIONS:
+                        resume.setSection(type, new ListSection(value.split("\\n")));
+                        break;
+                    case EDUCATION:
+                    case EXPERIENCE: {
                         List<Organization> organizations = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
                         for (int i = 0; i < values.length; i++) {
@@ -98,29 +104,38 @@ public class ResumeServlet extends HttpServlet {
         }
         Resume resume;
         switch (action) {
-            case "delete" -> {
+            case "delete": {
                 storage.delete(uuid);
                 response.sendRedirect("resume");
                 return;
             }
-            case "view" -> resume = storage.get(uuid);
-            case "add" -> resume = Resume.EMPTY;
-            case "edit" -> {
+            case "view":
+                resume = storage.get(uuid);
+                break;
+            case "add":
+                resume = Resume.EMPTY;
+                break;
+            case "edit": {
                 resume = storage.get(uuid);
                 for (SectionType type : SectionType.values()) {
                     Section section = resume.getSection(type);
                     switch (type) {
-                        case OBJECTIVE, PERSONAL -> {
+                        case OBJECTIVE:
+                        case PERSONAL: {
                             if (section == null) {
                                 section = TextSection.EMPTY;
                             }
+                            break;
                         }
-                        case ACHIEVEMENT, QUALIFICATIONS -> {
+                        case ACHIEVEMENT:
+                        case QUALIFICATIONS: {
                             if (section == null) {
                                 section = ListSection.EMPTY;
                             }
+                            break;
                         }
-                        case EXPERIENCE, EDUCATION -> {
+                        case EXPERIENCE:
+                        case EDUCATION: {
                             OrganizationSection orgSection = (OrganizationSection) section;
                             List<Organization> emptyFirstOrganizations = new ArrayList<>();
                             emptyFirstOrganizations.add(Organization.EMPTY);
@@ -137,8 +152,10 @@ public class ResumeServlet extends HttpServlet {
                     }
                     resume.setSection(type, section);
                 }
+                break;
             }
-            default -> throw new IllegalArgumentException("Action" + action + " is illegal");
+            default:
+                throw new IllegalArgumentException("Action" + action + " is illegal");
         }
         request.setAttribute("resume", resume);
         request.getRequestDispatcher("view".equals(action) ? "/WEB-INF/jsp/view.jsp" : "/WEB-INF/jsp/edit.jsp")
