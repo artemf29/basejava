@@ -1,0 +1,6 @@
+---
+exclude_paths:
+  - 'web/**'
+  - 'test/**'
+  - '**.md'
+  - '**.sql'
